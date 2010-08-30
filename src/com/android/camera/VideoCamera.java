@@ -35,6 +35,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
@@ -1585,6 +1586,10 @@ public class VideoCamera extends BaseCamera implements
     }
 
     private void acquireVideoThumb() {
+// don't known why, but it seems that I7500 can't handle 2 video decoding at the same time 
+// and something call a thumbnail creation at the same time
+// @TODO find a better alternative.
+try { Thread.sleep( 1500 ) ; } catch( java.lang.InterruptedException ie ) {}
         Bitmap videoFrame = ThumbnailUtils.createVideoThumbnail(
                 mCurrentVideoFilename, Video.Thumbnails.MINI_KIND);
         mThumbController.setData(mCurrentVideoUri, videoFrame);
