@@ -278,6 +278,9 @@
     <string name="pref_camera_coloreffect_entry_negative">Negative</string>
     <!-- Color effect that overexposes and reverses some of the tones. -->
     <string name="pref_camera_coloreffect_entry_solarize">Solarize</string>
+    <string name="pref_camera_coloreffect_entry_solarize2">Solarize 2</string>
+    <string name="pref_camera_coloreffect_entry_solarize3">Solarize 3</string>
+    <string name="pref_camera_coloreffect_entry_solarize4">Solarize 4</string>    
     <string name="pref_camera_coloreffect_entry_posterize">Posterize</string>
     <string name="pref_camera_coloreffect_entry_aqua">Aqua</string>
     <string name="pref_camera_coloreffect_entry_pastel">Pastel</string>
@@ -285,7 +288,12 @@
     <string name="pref_camera_coloreffect_entry_redtint">Red tint</string>
     <string name="pref_camera_coloreffect_entry_bluetint">Blue tint</string>
     <string name="pref_camera_coloreffect_entry_greentint">Green tint</string>
-
+    <string name="pref_camera_coloreffect_entry_pinktint">Pink tint</string>
+    <string name="pref_camera_coloreffect_entry_yellowtint">Yellow tint</string>
+    <string name="pref_camera_coloreffect_entry_purpletint">Purple tint</string>
+    <string name="pref_camera_coloreffect_entry_antique">Antique</string>
+    <string name="pref_camera_coloreffect_entry_emboss">Emboss</string>
+    <string name="pref_camera_coloreffect_entry_outline">Outline</string>
     <!-- Settings screen, Multiple levels entries -->
     <string name="pref_camera_multi_entry_level0">Level 0</string>
     <string name="pref_camera_multi_entry_level1">Level 1</string>
