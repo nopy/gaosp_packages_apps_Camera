@@ -151,7 +151,6 @@ public class VideoCamera extends BaseCamera implements
 
     private int mStorageStatus = STORAGE_STATUS_OK;
 
-    private MediaRecorder mMediaRecorder;
     private boolean mMediaRecorderRecording = false;
     private long mRecordingStartTime;
     // The video file that the hardware camera is about to record into
@@ -451,7 +450,8 @@ public class VideoCamera extends BaseCamera implements
 
         mVideoPreview = (SurfaceView) findViewById(R.id.camera_preview);
         mVideoFrame = (ImageView) findViewById(R.id.video_frame);
-
+        mFocusRectangle = (FocusRectangle) findViewById(R.id.focus_rectangle);
+        
         // don't set mSurfaceHolder here. We have it set ONLY within
         // surfaceCreated / surfaceDestroyed, other parts of the code
         // assume that when it is set, the surface is also set.
@@ -506,6 +506,7 @@ public class VideoCamera extends BaseCamera implements
         }
 
         initializeZoom();
+        initializeTouchFocus();
     }
 
     private void overrideHudSettings(final String videoEncoder,
@@ -1234,6 +1235,11 @@ public class VideoCamera extends BaseCamera implements
         }
         mMediaRecorderRecording = false;
 
+        resetFocusIndicator();
+        if (mFocusRectangle != null) {
+            mFocusRectangle.clear();
+        }
+
         // Update the last video thumbnail.
         if (!mIsVideoCaptureIntent) {
             if (!mThumbController.isUriValid()) {
@@ -1905,5 +1911,9 @@ try { Thread.sleep( 1500 ) ; } catch( java.lang.InterruptedException ie ) {}
         }
     }
 
+    @Override
+    protected int getCameraMode() {
+        return CameraSettings.VIDEO_MODE;
+    }
 
 }
