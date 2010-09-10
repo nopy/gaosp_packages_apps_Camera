@@ -53,7 +53,11 @@ public class CameraHeadUpDisplay extends HeadUpDisplay {
                 CameraSettings.KEY_CONTRAST,
                 CameraSettings.KEY_SHARPNESS,
                 CameraSettings.KEY_PICTURE_SIZE,
-                CameraSettings.KEY_JPEG_QUALITY);
+                CameraSettings.KEY_JPEG_QUALITY,
+		CameraSettings.KEY_WDR,
+		CameraSettings.KEY_ISC,
+		CameraSettings.KEY_FACE_DETECTION,
+		CameraSettings.KEY_AEWB_LOCK);
 
         mOtherSettings = new OtherSettingsIndicator(context, prefs);
         mOtherSettings.setOnRestorePreferencesClickedRunner(new Runnable() {

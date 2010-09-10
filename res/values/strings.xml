@@ -264,6 +264,8 @@
     <string name="pref_camera_whitebalance_entry_daylight">Daylight</string>
     <string name="pref_camera_whitebalance_entry_fluorescent">Fluorescent</string>
     <string name="pref_camera_whitebalance_entry_cloudy">Cloudy</string>
+    <string name="pref_camera_whitebalance_entry_shade">Shade</string>
+    <string name="pref_camera_whitebalance_entry_horizon">Horizon</string>
 
     <!-- Default color effect setting. -->
     <string name="pref_camera_coloreffect_default" translatable="false">none</string>
@@ -483,7 +485,7 @@
      <string name="pref_camera_antibanding_entry_3">Auto</string>
 
      <!-- Default auto exposure setting. Do not translate. -->
-     <string name="pref_camera_autoexposure_default">meter-average</string>
+     <string name="pref_camera_autoexposure_default">meter-center</string>
 
      <!-- Settings screen, Select auto exposure title -->
      <string name="pref_camera_autoexposure_title">Metering Mode</string>
@@ -497,5 +499,32 @@
      <string name="pref_camera_autoexposure_value_frameaverage">meter-average</string>
      <string name="pref_camera_autoexposure_value_centerweighted">meter-center</string>
      <string name="pref_camera_autoexposure_value_spotmetering">meter-spot</string>
+
+    <!-- Default face detection setting. -->
+    <string name="pref_camera_facedetection_default" translatable="false">off</string>
+    <string name="pref_camera_facedetection_title">Face Detection</string>
+    <string name="pref_camera_facedetection_entry_on">On</string>
+    <string name="pref_camera_facedetection_entry_off">Off</string>
+    
+     <!-- Default face detection setting. -->
+    <string name="pref_camera_imagestabilizationcontrol_default" translatable="false">off</string>
+    <string name="pref_camera_imagestabilizationcontrol_title">Image Stabilization Control</string>
+    <string name="pref_camera_imagestabilizationcontrol_entry_on">On</string>
+    <string name="pref_camera_imagestabilizationcontrol_entry_off">Off</string>
+    <string name="pref_camera_imagestabilizationcontrol_entry_auto">Auto</string>
+    <string name="pref_camera_imagestabilizationcontrol_entry_movieon">Movie On</string>
+
+    <!-- Default face detection setting. -->
+    <string name="pref_camera_widedynamicrange_default" translatable="false">off</string>    
+    <string name="pref_camera_widedynamicrange_title">Wide Dynamic Range</string>
+    <string name="pref_camera_widedynamicrange_entry_on">On</string>
+    <string name="pref_camera_widedynamicrange_entry_off">Off</string>    
+    
+    <string name="pref_camera_aewblock_default" translatable="false">ae-lock-awb-lock</string>    
+    <string name="pref_camera_aewblock_title">AE/AWB Lock/Unlock</string>
+    <string name="pref_camera_aewblock_entry_ae_lock_awb_lock">AE Lock/AWB Lock</string>
+    <string name="pref_camera_aewblock_entry_ae_lock_awb_unlock">AE Lock/AWB Unlock</string>    
+    <string name="pref_camera_aewblock_entry_ae_unlock_awb_lock">AE Unlock/AWB Lock</string>
+    <string name="pref_camera_aewblock_entry_ae_unlock_awb_unlock">AE Unlock/AWB Unlock</string>    
 
 </resources>

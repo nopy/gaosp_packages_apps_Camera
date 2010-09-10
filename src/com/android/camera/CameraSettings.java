@@ -59,6 +59,11 @@ public class CameraSettings {
     public static final String KEY_CONTRAST = "pref_camera_contrast_key";
     public static final String KEY_SATURATION = "pref_camera_saturation_key";
     public static final String KEY_BRIGHTNESS = "pref_camera_brightness_key";
+    public static final String KEY_WDR = "pref_camera_widedynamicrange_key";
+    public static final String KEY_ISC = "pref_camera_imagestabilizationcontrol_key";
+    public static final String KEY_FACE_DETECTION = "pref_camera_facedetection_key";
+    public static final String KEY_AEWB_LOCK = "pref_camera_aewblock_key";
+
     
     public static final String QUICK_CAPTURE_ON = "on";
     public static final String QUICK_CAPTURE_OFF = "off";
@@ -181,6 +186,11 @@ public class CameraSettings {
         ListPreference brightness = group.findPreference(KEY_BRIGHTNESS);
         ListPreference videoEncoder = group.findPreference(KEY_VIDEO_ENCODER);
         ListPreference audioEncoder = group.findPreference(KEY_AUDIO_ENCODER);
+	ListPreference wdr = group.findPreference(KEY_WDR);
+	ListPreference isc = group.findPreference(KEY_ISC);
+	ListPreference faceDetection = group.findPreference(KEY_FACE_DETECTION);
+	ListPreference aewbLock = group.findPreference(KEY_AEWB_LOCK);
+
         
         // Since the screen could be loaded from different resources, we need
         // to check if the preference is available here
@@ -301,6 +311,22 @@ public class CameraSettings {
         if (saturation != null && mParameters.getMaxSaturation() == 0.0f) {
             removePreference(group, saturation.getKey());
         }
+	if( wdr != null ) {
+            filterUnsupportedOptions(group,
+                    wdr, mParameters.getSupportedWideDynamicRange());
+	}
+	if( isc != null ) {
+            filterUnsupportedOptions(group,
+                    isc, mParameters.getSupportedImageStabilizationControl());
+	}
+	if( faceDetection != null ) {
+            filterUnsupportedOptions(group,
+                    faceDetection, mParameters.getSupportedFaceDetection());
+	} 
+	if( aewbLock != null ) {
+            filterUnsupportedOptions(group,
+                    aewbLock, mParameters.getSupportedAEWBLock());
+	} 
     }
 
     private void buildExposureCompensation(

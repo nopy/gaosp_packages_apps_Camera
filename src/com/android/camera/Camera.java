@@ -1830,6 +1830,37 @@ public class Camera extends BaseCamera {
             mParameters.setColorEffect(colorEffect);
         }
 
+         // Set wide dynamic range parameter.
+         String wdr = mPreferences.getString(
+                 CameraSettings.KEY_WDR,
+                 getString(R.string.pref_camera_widedynamicrange_default));
+         if (isSupported(wdr, mParameters.getSupportedWideDynamicRange())) {
+             mParameters.setWideDynamicRange(wdr);
+         }
+
+         // Set image stabilization control parameter.
+         String isc = mPreferences.getString(
+                 CameraSettings.KEY_ISC,
+                 getString(R.string.pref_camera_imagestabilizationcontrol_default));
+         if (isSupported(isc, mParameters.getSupportedImageStabilizationControl())) {
+             mParameters.setImageStabilizationControl(isc);
+         } 
+
+         // Set image stabilization control parameter.
+         String faceDetection = mPreferences.getString(
+                 CameraSettings.KEY_FACE_DETECTION,
+                 getString(R.string.pref_camera_facedetection_default));
+         if (isSupported(faceDetection, mParameters.getSupportedFaceDetection())) {
+             mParameters.setFaceDetection(faceDetection);
+         }
+
+	  // Set image stabilization control parameter.
+         String aewbLock = mPreferences.getString(
+                 CameraSettings.KEY_AEWB_LOCK,
+                 getString(R.string.pref_camera_aewblock_default));
+         if (isSupported(aewbLock, mParameters.getSupportedAEWBLock())) {
+             mParameters.setAEWBLock(aewbLock);
+         }
         // Set exposure compensation
         String exposure = mPreferences.getString(
                 CameraSettings.KEY_EXPOSURE,

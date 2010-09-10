@@ -499,5 +499,57 @@
          <item>@string/pref_camera_autoexposure_value_centerweighted</item>
          <item>@string/pref_camera_autoexposure_value_spotmetering</item>
      </string-array>
+     
+    <!-- Wide Dynamic Range -->
+    <string-array name="pref_camera_facedetection_entries" translatable="false">
+        <item>@string/pref_camera_facedetection_entry_off</item>
+        <item>@string/pref_camera_facedetection_entry_on</item>
+    </string-array>
+
+    <string-array name="pref_camera_facedetection_entryvalues" translatable="false">
+        <item>off</item>
+        <item>on</item>
+    </string-array>
+    
+    <!-- Wide Dynamic Range -->
+    <string-array name="pref_camera_imagestabilizationcontrol_entries" translatable="false">
+        <item>@string/pref_camera_imagestabilizationcontrol_entry_off</item>
+        <item>@string/pref_camera_imagestabilizationcontrol_entry_on</item>
+        <item>@string/pref_camera_imagestabilizationcontrol_entry_auto</item>        
+        <item>@string/pref_camera_imagestabilizationcontrol_entry_movieon</item>        
+    </string-array>
+
+    <string-array name="pref_camera_imagestabilizationcontrol_entryvalues" translatable="false">
+        <item>off</item>
+        <item>on</item>
+        <item>auto</item>
+        <item>movie-on</item>
+    </string-array>
+    
+    <!-- Wide Dynamic Range -->
+    <string-array name="pref_camera_widedynamicrange_entries" translatable="false">
+        <item>@string/pref_camera_widedynamicrange_entry_off</item>
+        <item>@string/pref_camera_widedynamicrange_entry_on</item>
+    </string-array>
+
+    <string-array name="pref_camera_widedynamicrange_entryvalues" translatable="false">
+        <item>off</item>
+        <item>on</item>
+    </string-array>
+
+    <!-- AE/AWB Lock -->
+    <string-array name="pref_camera_aewblock_entries" translatable="false">
+        <item>@string/pref_camera_aewblock_entry_ae_lock_awb_lock</item>
+        <item>@string/pref_camera_aewblock_entry_ae_lock_awb_unlock</item>
+        <item>@string/pref_camera_aewblock_entry_ae_unlock_awb_lock</item>
+        <item>@string/pref_camera_aewblock_entry_ae_unlock_awb_unlock</item>
+    </string-array>
+
+    <string-array name="pref_camera_aewblock_entryvalues" translatable="false">
+        <item>ae-lock-awb-lock</item>
+        <item>ae-lock-awb-unlock</item>
+        <item>ae-unlock-awb-lock</item>
+        <item>ae-unlock-awb-unlock</item>
+    </string-array>
 
 </resources>
