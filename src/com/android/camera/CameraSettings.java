@@ -71,8 +71,8 @@ public class CameraSettings {
     private static final String VIDEO_QUALITY_HIGH = "high";
     private static final String VIDEO_QUALITY_MMS = "mms";
     private static final String VIDEO_QUALITY_YOUTUBE = "youtube";
-    
-    public static final String EXPOSURE_DEFAULT_VALUE = "0";
+
+    public static final String EXPOSURE_DEFAULT_VALUE = "0.0";
 
     public static final int CURRENT_VERSION = 4;
 
@@ -173,17 +173,12 @@ public class CameraSettings {
         ListPreference sceneMode = group.findPreference(KEY_SCENE_MODE);
         ListPreference flashMode = group.findPreference(KEY_FLASH_MODE);
         ListPreference focusMode = group.findPreference(KEY_FOCUS_MODE);
-        ListPreference exposure = group.findPreference(KEY_EXPOSURE);
         ListPreference videoFlashMode =
                 group.findPreference(KEY_VIDEOCAMERA_FLASH_MODE);
-        ListPreference mIso = group.findPreference(KEY_ISO);
+        ListPreference iso = group.findPreference(KEY_ISO);
         ListPreference lensShade = group.findPreference(KEY_LENSSHADING);
         ListPreference antiBanding = group.findPreference(KEY_ANTIBANDING);
         ListPreference autoExposure = group.findPreference(KEY_AUTOEXPOSURE);
-        ListPreference sharpness = group.findPreference(KEY_SHARPNESS);
-        ListPreference contrast = group.findPreference(KEY_CONTRAST);
-        ListPreference saturation = group.findPreference(KEY_SATURATION);
-        ListPreference brightness = group.findPreference(KEY_BRIGHTNESS);
         ListPreference videoEncoder = group.findPreference(KEY_VIDEO_ENCODER);
         ListPreference audioEncoder = group.findPreference(KEY_AUDIO_ENCODER);
 	ListPreference wdr = group.findPreference(KEY_WDR);
@@ -191,7 +186,6 @@ public class CameraSettings {
 	ListPreference faceDetection = group.findPreference(KEY_FACE_DETECTION);
 	ListPreference aewbLock = group.findPreference(KEY_AEWB_LOCK);
 
-        
         // Since the screen could be loaded from different resources, we need
         // to check if the preference is available here
         if (videoQuality != null) {
@@ -280,9 +274,9 @@ public class CameraSettings {
             filterUnsupportedOptions(group,
                     videoFlashMode, mParameters.getSupportedFlashModes());
         }
-        if (mIso != null) {
+        if (iso != null) {
             filterUnsupportedOptions(group,
-                    mIso, mParameters.getSupportedIsoValues());
+                    iso, mParameters.getSupportedIsoValues());
         }
         if (lensShade!= null) {
             filterUnsupportedOptions(group,
@@ -295,21 +289,6 @@ public class CameraSettings {
         if (autoExposure != null) {
             filterUnsupportedOptions(group,
                     autoExposure, mParameters.getSupportedAutoexposure());
-        }
-        if (exposure != null) {
-            buildExposureCompensation(group, exposure);
-        }
-        if (brightness != null && mParameters.getMaxBrightness() == 0.0f) {
-            removePreference(group, brightness.getKey());
-        }
-        if (sharpness != null && mParameters.getMaxSharpness() == 0.0f) {
-            removePreference(group, sharpness.getKey());
-        }
-        if (contrast != null && mParameters.getMaxContrast() == 0.0f) {
-            removePreference(group, contrast.getKey());
-        }
-        if (saturation != null && mParameters.getMaxSaturation() == 0.0f) {
-            removePreference(group, saturation.getKey());
         }
 	if( wdr != null ) {
             filterUnsupportedOptions(group,
@@ -327,31 +306,6 @@ public class CameraSettings {
             filterUnsupportedOptions(group,
                     aewbLock, mParameters.getSupportedAEWBLock());
 	} 
-    }
-
-    private void buildExposureCompensation(
-            PreferenceGroup group, ListPreference exposure) {
-        int max = mParameters.getMaxExposureCompensation();
-        int min = mParameters.getMinExposureCompensation();
-        if (max == 0 && min == 0) {
-            removePreference(group, exposure.getKey());
-            return;
-        }
-        float step = mParameters.getExposureCompensationStep();
-
-        // show only integer values for exposure compensation
-        int maxValue = (int) Math.floor(max * step);
-        int minValue = (int) Math.ceil(min * step);
-        CharSequence entries[] = new CharSequence[maxValue - minValue + 1];
-        CharSequence entryValues[] = new CharSequence[maxValue - minValue + 1];
-        for (int i = minValue; i <= maxValue; ++i) {
-            entryValues[maxValue - i] = Integer.toString(Math.round(i / step));
-            StringBuilder builder = new StringBuilder();
-            if (i > 0) builder.append('+');
-            entries[maxValue - i] = builder.append(i).toString();
-        }
-        exposure.setEntries(entries);
-        exposure.setEntryValues(entryValues);
     }
 
     private static boolean removePreference(PreferenceGroup group, String key) {

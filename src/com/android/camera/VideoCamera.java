@@ -31,13 +31,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.hardware.CameraSwitch;
 import android.media.CamcorderProfile;
@@ -131,7 +129,6 @@ public class VideoCamera extends BaseCamera implements
     private final static String EXTRA_QUICK_CAPTURE =
             "android.intent.extra.quickCapture";
 
-    private SharedPreferences mPreferences;
     private OrientationEventListener mOrientationListener;
     private int mLastOrientation = 0;  // No rotation (landscape) by default.
 
@@ -565,7 +562,7 @@ public class VideoCamera extends BaseCamera implements
         mGLRootView = new GLRootView(this);
         frame.addView(mGLRootView);
 
-        mHeadUpDisplay = new CamcorderHeadUpDisplay(this, CameraSettings.isVideoZoomSupported(mParameters));
+        mHeadUpDisplay = new CamcorderHeadUpDisplay(this, mParameters);
         CameraSettings settings = new CameraSettings(this, mParameters);
 
         PreferenceGroup group =
@@ -1683,10 +1680,6 @@ try { Thread.sleep( 1500 ) ; } catch( java.lang.InterruptedException ie ) {}
                 UPDATE_RECORD_TIME, next_update_delay);
     }
 
-    private static boolean isSupported(String value, List<String> supported) {
-        return supported == null ? false : supported.indexOf(value) >= 0;
-    }
-
     private void setCameraParameters() {
         mParameters = mCameraDevice.getParameters();
 
@@ -1714,59 +1707,8 @@ try { Thread.sleep( 1500 ) ; } catch( java.lang.InterruptedException ie ) {}
             }
         }
 
-        // Set white balance parameter.
-        String whiteBalance = mPreferences.getString(
-                CameraSettings.KEY_WHITE_BALANCE,
-                getString(R.string.pref_camera_whitebalance_default));
-        if (isSupported(whiteBalance,
-                mParameters.getSupportedWhiteBalance())) {
-            mParameters.setWhiteBalance(whiteBalance);
-        } else {
-            whiteBalance = mParameters.getWhiteBalance();
-            if (whiteBalance == null) {
-                whiteBalance = Parameters.WHITE_BALANCE_AUTO;
-            }
-        }
-
-        // Set color effect parameter.
-        String colorEffect = mPreferences.getString(
-                CameraSettings.KEY_COLOR_EFFECT,
-                getString(R.string.pref_camera_coloreffect_default));
-        if (isSupported(colorEffect, mParameters.getSupportedColorEffects())) {
-            mParameters.setColorEffect(colorEffect);
-        }
-
-        // Set sharpness parameter.
-        String sharpness = mPreferences.getString(
-                CameraSettings.KEY_SHARPNESS,
-                getString(R.string.pref_camera_sharpness_default));
-        if (mParameters.getMaxSharpness() > 0) {
-            mParameters.setSharpness(Float.parseFloat(sharpness));
-        }
-
-        // Set contrast parameter.
-        String contrast = mPreferences.getString(
-                CameraSettings.KEY_CONTRAST,
-                getString(R.string.pref_camera_contrast_default));
-        if (mParameters.getMaxContrast() > 0) {
-            mParameters.setContrast(Float.parseFloat(contrast));
-        }
-
-        // Set saturation parameter.
-        String saturation = mPreferences.getString(
-                CameraSettings.KEY_SATURATION,
-                getString(R.string.pref_camera_saturation_default));
-        if (mParameters.getMaxSaturation() > 0) {
-            mParameters.setSaturation(Float.parseFloat(saturation));
-        }
-
-        // Set brightness parameter.
-        String brightness = mPreferences.getString(
-                CameraSettings.KEY_BRIGHTNESS,
-                getString(R.string.pref_camera_brightness_default));
-        if (mParameters.getMaxBrightness() > 0) {
-            mParameters.setBrightness(Float.parseFloat(brightness));
-        }
+        setCommonParameters();
+        setWhiteBalance();
 
         CameraSettings.setCamMode(mParameters, CameraSettings.VIDEO_MODE);
         setCameraHardwareParameters();
