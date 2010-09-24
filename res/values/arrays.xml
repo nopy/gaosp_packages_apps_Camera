@@ -230,6 +230,7 @@
 
     <!-- Videocamera Preferences flash mode dialog box entries -->
     <string-array name="pref_camera_video_flashmode_entries" translatable="false">
+        <item>@string/pref_camera_flashmode_entry_auto</item>    
         <item>@string/pref_camera_flashmode_entry_on</item>
         <item>@string/pref_camera_flashmode_entry_off</item>
     </string-array>
