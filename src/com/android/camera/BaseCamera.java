@@ -179,7 +179,11 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
             String sharpness = mPreferences.getString(
                     CameraSettings.KEY_SHARPNESS,
                     String.valueOf(mParameters.getDefaultSharpness()));
-            mParameters.setSharpness(Integer.valueOf(sharpness));
+            int s = Integer.valueOf(sharpness) ;
+            if( s > mParameters.getMaxSharpness() ) {
+            	s = mParameters.getDefaultSharpness() ;
+            }
+            mParameters.setSharpness(s);
         }
 
         // Set contrast parameter.
@@ -187,7 +191,11 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
             String contrast = mPreferences.getString(
                     CameraSettings.KEY_CONTRAST,
                     String.valueOf(mParameters.getDefaultContrast()));
-            mParameters.setContrast(Integer.valueOf(contrast));
+            int c = Integer.valueOf(contrast) ;
+            if( c > mParameters.getMaxContrast() ) {
+            	c = mParameters.getDefaultContrast() ;
+            }
+            mParameters.setContrast(c);
         }
 
         // Set saturation parameter.
@@ -195,7 +203,11 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
             String saturation = mPreferences.getString(
                     CameraSettings.KEY_SATURATION,
                     String.valueOf(mParameters.getDefaultSaturation()));
-            mParameters.setSaturation(Integer.valueOf(saturation));
+            int s = Integer.valueOf(saturation) ;
+            if( s > mParameters.getMaxSaturation() ) {
+            	s = mParameters.getDefaultSaturation() ;
+            }
+            mParameters.setSaturation(s);
         }
 
         // Set exposure compensation
