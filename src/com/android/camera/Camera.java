@@ -209,7 +209,7 @@ public class Camera extends BaseCamera {
 
     private StabilityChangeListener mStabilityChangeListener = new StabilityChangeListener() {
         public void onStabilityChanged(boolean stable) {
-            if ("auto".equals(mFocusMode)) {
+            if ("auto".equals(mFocusMode) || "normal".equals(mFocusMode) || "macro".equals(mFocusMode) ) {
                 long now = System.currentTimeMillis();
 
                 // 2 second interval for measuring stability
