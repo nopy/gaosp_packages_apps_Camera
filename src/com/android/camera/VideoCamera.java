@@ -36,6 +36,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.hardware.CameraSwitch;
 import android.media.CamcorderProfile;
@@ -275,6 +276,8 @@ public class VideoCamera extends BaseCamera implements
     private Switcher mSwitcher;
     private boolean mRecordingTimeCountsDown = false;
 
+    private long mLastStabilityChange = 0;
+
     private final ArrayList<MenuItem> mGalleryItems = new ArrayList<MenuItem>();
 
     private final Handler mHandler = new MainHandler();
@@ -319,6 +322,25 @@ public class VideoCamera extends BaseCamera implements
             }
         }
     }
+
+    private StabilityChangeListener mStabilityChangeListener = new StabilityChangeListener() {
+        public void onStabilityChanged(boolean stable) {
+            long now = System.currentTimeMillis();
+
+            // 2 second interval for measuring stability
+            if (stable && (now - mLastStabilityChange) > 120) {
+                Log.d(TAG, "** Camera stable **");
+                mLastStabilityChange = now;
+                if (mMediaRecorder != null) {
+                    mMediaRecorder.autoFocusCamera();
+                }
+                mFocusRectangle.showSuccess();
+            } else if (!stable) {
+                mFocusRectangle.clear();
+            }
+        }
+
+    };
 
     private BroadcastReceiver mReceiver = null;
 
@@ -504,6 +526,7 @@ public class VideoCamera extends BaseCamera implements
 
         initializeZoom();
         initializeTouchFocus();
+        setStabilityChangeListener(mStabilityChangeListener);
     }
 
     private void overrideHudSettings(final String videoEncoder,
@@ -880,6 +903,7 @@ public class VideoCamera extends BaseCamera implements
 
     private void startPreview() throws CameraHardwareException {
         Log.d(TAG, "startPreview");
+
         if (mPreviewing) {
             // After recording a video, preview is not stopped. So just return.
             return;
@@ -894,6 +918,11 @@ public class VideoCamera extends BaseCamera implements
         mCameraDevice.lock();
         setCameraParameters();
         setPreviewDisplay(mSurfaceHolder);
+
+        // Disable orientation effect at 720p until frame is removed
+        if (CameraSettings.is720p(mParameters)) {
+            mOrientationListener.disable();
+        }
 
         try {
             mCameraDevice.startPreview();
@@ -1705,6 +1734,15 @@ try { Thread.sleep( 1500 ) ; } catch( java.lang.InterruptedException ie ) {}
                 flashMode = getString(
                         R.string.pref_camera_flashmode_no_flash);
             }
+        }
+
+        mFocusMode = mPreferences.getString(
+                CameraSettings.KEY_VIDEOCAMERA_FOCUS_MODE,
+                getString(R.string.pref_camera_focusmode_default));
+        if (Parameters.FOCUS_MODE_AUTO.equals(mFocusMode)) {
+            setStabilityChangeListener(mStabilityChangeListener);
+        } else if ("touch".equals(mFocusMode) || Parameters.FOCUS_MODE_INFINITY.equals(mFocusMode)) {
+            setStabilityChangeListener(null);
         }
 
         setCommonParameters();

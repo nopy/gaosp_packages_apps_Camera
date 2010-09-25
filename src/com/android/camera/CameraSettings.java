@@ -63,8 +63,8 @@ public class CameraSettings {
     public static final String KEY_ISC = "pref_camera_imagestabilizationcontrol_key";
     public static final String KEY_FACE_DETECTION = "pref_camera_facedetection_key";
     public static final String KEY_AEWB_LOCK = "pref_camera_aewblock_key";
+    public static final String KEY_VIDEOCAMERA_FOCUS_MODE = "pref_camera_video_focusmode_key";
 
-    
     public static final String QUICK_CAPTURE_ON = "on";
     public static final String QUICK_CAPTURE_OFF = "off";
 
@@ -433,10 +433,14 @@ public class CameraSettings {
         boolean ret = params.isZoomSupported();
         if (ret) {
             // No zoom at 720P currently. Driver limitation?
-            Size size = params.getPreviewSize();
-            ret = !(size.width == 1280 && size.height == 720);
+            ret = !is720p(params);
         }
         return ret;
+    }
+
+    public static boolean is720p(Parameters params) {
+        Size size = params.getPreviewSize();
+        return !(size.width == 1280 && size.height == 720);
     }
 
     public static void dumpParameters(Parameters params) {
