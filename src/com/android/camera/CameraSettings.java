@@ -64,6 +64,7 @@ public class CameraSettings {
     public static final String KEY_FACE_DETECTION = "pref_camera_facedetection_key";
     public static final String KEY_AEWB_LOCK = "pref_camera_aewblock_key";
     public static final String KEY_VIDEOCAMERA_FOCUS_MODE = "pref_camera_video_focusmode_key";
+    public static final String KEY_STABLESHOT = "pref_camera_stableshot_key";
 
     public static final String QUICK_CAPTURE_ON = "on";
     public static final String QUICK_CAPTURE_OFF = "off";
@@ -175,6 +176,8 @@ public class CameraSettings {
         ListPreference focusMode = group.findPreference(KEY_FOCUS_MODE);
         ListPreference videoFlashMode =
                 group.findPreference(KEY_VIDEOCAMERA_FLASH_MODE);
+        ListPreference videoFocusMode =
+                group.findPreference(KEY_VIDEOCAMERA_FOCUS_MODE);
         ListPreference iso = group.findPreference(KEY_ISO);
         ListPreference lensShade = group.findPreference(KEY_LENSSHADING);
         ListPreference antiBanding = group.findPreference(KEY_ANTIBANDING);
@@ -268,6 +271,20 @@ public class CameraSettings {
             } else {
                 // Front camera cannot focus
                 removePreference(group, focusMode.getKey());
+            }
+        }
+        if (videoFocusMode != null) {
+            if (isMainCamera()) {
+                List<String> focusModes = new ArrayList<String>();
+                focusModes.add("auto");
+                focusModes.add("infinity");
+                if (hasTouchFocusSupport(mParameters)) {
+                    focusModes.add("touch");
+                }
+                filterUnsupportedOptions(group, videoFocusMode, focusModes);
+            } else {
+                // Front camera cannot focus
+                removePreference(group, videoFocusMode.getKey());
             }
         }
         if (videoFlashMode != null) {

@@ -137,5 +137,11 @@
                 camera:title="@string/pref_camera_aewblock_title"
                 camera:entries="@array/pref_camera_aewblock_entries"
                 camera:entryValues="@array/pref_camera_aewblock_entryvalues" />   
+        <ListPreference
+                camera:key="pref_camera_stableshot_key"
+                camera:defaultValue="@string/pref_camera_stableshot_default"
+                camera:title="@string/pref_camera_stableshot_title"
+                camera:entries="@array/pref_camera_stableshot_entries"
+                camera:entryValues="@array/pref_camera_stableshot_entryvalues" />
     </PreferenceGroup>
 </PreferenceGroup>
