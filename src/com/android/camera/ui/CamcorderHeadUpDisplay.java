@@ -40,6 +40,7 @@ public class CamcorderHeadUpDisplay extends HeadUpDisplay {
         super.initializeIndicatorBar(context, group);
 
         ListPreference[] prefs = getListPreferences(group,
+        		CameraSettings.KEY_STORAGE,
                 CameraSettings.KEY_VIDEOCAMERA_FOCUS_MODE,
                 CameraSettings.KEY_SCENE_MODE,
                 CameraSettings.KEY_PICTURE_SIZE,

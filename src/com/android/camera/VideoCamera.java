@@ -1296,6 +1296,9 @@ public class VideoCamera extends BaseCamera implements
         }
 
         String cameraDirPath = ImageManager.CAMERA_IMAGE_BUCKET_NAME;
+        if( "external".equals( mStorage ) ) {
+        	cameraDirPath = ImageManager.CAMERA_IMAGE_BUCKET_SDEXT_NAME ;
+        }        
         String filePath = cameraDirPath + "/" + filename;
         File cameraDir = new File(cameraDirPath);
         cameraDir.mkdirs();
@@ -1311,7 +1314,7 @@ public class VideoCamera extends BaseCamera implements
         }
         values.put(Video.Media.DATA, filePath);
         mCameraVideoFilename = filePath;
-        Log.v(TAG, "Current camera video filename: " + mCameraVideoFilename);
+        Log.d(TAG, "Current camera video filename: " + mCameraVideoFilename);
         mCurrentVideoValues = values;
     }
 
