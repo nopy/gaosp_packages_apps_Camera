@@ -130,15 +130,21 @@ public class ImageManager {
     public static final String CAMERA_IMAGE_BUCKET_NAME =
             Environment.getExternalStorageDirectory().toString()
             + "/DCIM/Camera";
+    
+    public static final String CAMERA_IMAGE_BUCKET_SDEXT_NAME =
+    	Environment.getExternalSdDirectory().toString()
+        + "/DCIM/Camera";    
+    
     public static final String CAMERA_IMAGE_BUCKET_ID =
             getBucketId(CAMERA_IMAGE_BUCKET_NAME);
+    
 
     /**
      * Matches code in MediaProvider.computeBucketValues. Should be a common
      * function.
      */
     public static String getBucketId(String path) {
-        return String.valueOf(path.toLowerCase().hashCode());
+    	return String.valueOf(path.toLowerCase().hashCode());
     }
 
     /**

@@ -520,10 +520,25 @@
      <string name="pref_camera_stableshot_entry_2">1 Second</string>
      <string name="pref_camera_stableshot_entry_3">2 Seconds</string>
 
+
      <!-- Stable shot settings values (.5 second intervals). Do not translate. -->
      <string name="pref_camera_stableshot_value_0">0</string>
      <string name="pref_camera_stableshot_value_1">1</string>
      <string name="pref_camera_stableshot_value_2">2</string>
      <string name="pref_camera_stableshot_value_3">4</string>
+
+     <!-- Stable shot setting title -->
+     <string name="pref_camera_storage_title">Storage location</string>
+
+     <!-- Stable shot default. Do not translate. -->
+     <string name="pref_camera_storage_default">internal</string>
+     
+     <!-- Storage settings entries -->
+     <string name="pref_camera_storage_entry_0">Internal</string>
+     <string name="pref_camera_storage_entry_1">External SD</string>
+
+     <!-- Storage values. Do not translate. -->
+     <string name="pref_camera_storage_value_0">internal</string>
+     <string name="pref_camera_storage_value_1">external</string>
 
 </resources>

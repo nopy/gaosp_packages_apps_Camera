@@ -27,6 +27,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.MediaRecorder;
+import android.os.Environment;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -79,6 +80,8 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
     protected int mStableShotCounter = 0;
 
     protected boolean deviceStable = false;
+    
+    protected String mStorage ;
 
     protected abstract void onZoomValueChanged(int index);
 
@@ -228,6 +231,14 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
             mStableShotDuration = 0;
         }
 
+    	mStorage = mPreferences.getString(
+                CameraSettings.KEY_STORAGE ,
+                getResources().getString(R.string.pref_camera_storage_default)) ;
+        
+		if( "external".equals( mStorage ) && ! Environment.getExternalSdState().equals(Environment.MEDIA_MOUNTED) ) {
+			mStorage = "internal" ;
+		}
+    	
         // Set exposure compensation
         String exposure = mPreferences.getString(
                 CameraSettings.KEY_EXPOSURE,

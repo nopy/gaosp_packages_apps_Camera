@@ -25,6 +25,7 @@ import android.hardware.CameraSwitch;
 import android.media.CamcorderProfile;
 import android.media.EncoderCapabilities;
 import android.media.EncoderCapabilities.VideoEncoderCap;
+import android.os.Environment;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class CameraSettings {
     public static final String KEY_AEWB_LOCK = "pref_camera_aewblock_key";
     public static final String KEY_VIDEOCAMERA_FOCUS_MODE = "pref_camera_video_focusmode_key";
     public static final String KEY_STABLESHOT = "pref_camera_stableshot_key";
+    public static final String KEY_STORAGE = "pref_camera_storage_key";
 
     public static final String QUICK_CAPTURE_ON = "on";
     public static final String QUICK_CAPTURE_OFF = "off";
@@ -188,6 +190,7 @@ public class CameraSettings {
 	ListPreference isc = group.findPreference(KEY_ISC);
 	ListPreference faceDetection = group.findPreference(KEY_FACE_DETECTION);
 	ListPreference aewbLock = group.findPreference(KEY_AEWB_LOCK);
+	ListPreference storage = group.findPreference(KEY_STORAGE);
 
         // Since the screen could be loaded from different resources, we need
         // to check if the preference is available here
@@ -323,6 +326,17 @@ public class CameraSettings {
             filterUnsupportedOptions(group,
                     aewbLock, mParameters.getSupportedAEWBLock());
 	} 
+	
+	if( storage != null ) {		
+		ArrayList<String> supported = new ArrayList<String>();
+		supported.add("internal") ;
+		if( Environment.getExternalSdState().equals(Environment.MEDIA_MOUNTED) ) {
+			supported.add("external") ;
+		} 
+        filterUnsupportedOptions(group,
+        		storage, supported);		
+	}
+	
     }
 
     private static boolean removePreference(PreferenceGroup group, String key) {

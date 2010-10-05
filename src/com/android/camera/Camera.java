@@ -679,12 +679,20 @@ public class Camera extends BaseCamera {
                 String title = createName(dateTaken);
                 String filename = title + ".jpg";
                 int[] degree = new int[1];
+                
+                String directory = ImageManager.CAMERA_IMAGE_BUCKET_NAME ; 
+                Log.d(TAG, "storage param is == " + mStorage ) ;
+                if( "external".equals( mStorage ) ) {
+                	directory = ImageManager.CAMERA_IMAGE_BUCKET_SDEXT_NAME ;
+                }
+                Log.d(TAG , "Storing picture into " + directory ) ;
+                
                 mLastContentUri = ImageManager.addImage(
                         mContentResolver,
                         title,
                         dateTaken,
                         loc, // location from gps/network
-                        ImageManager.CAMERA_IMAGE_BUCKET_NAME, filename,
+                        directory, filename,
                         null, data,
                         degree);
                 return degree[0];

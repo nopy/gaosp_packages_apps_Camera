@@ -545,4 +545,16 @@
          <item>@string/pref_camera_stableshot_value_3</item>
      </string-array>
 
+     <!-- Stable shot settings entries -->
+     <string-array name="pref_camera_storage_entries">
+         <item>@string/pref_camera_storage_entry_0</item>
+         <item>@string/pref_camera_storage_entry_1</item>
+     </string-array>
+
+     <!-- Stable shot settings values -->
+     <string-array name="pref_camera_storage_entryvalues">
+         <item>@string/pref_camera_storage_value_0</item>
+         <item>@string/pref_camera_storage_value_1</item>
+     </string-array>
+
 </resources>
