@@ -248,7 +248,7 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
             int max = mParameters.getMaxExposureCompensation();
             int min = mParameters.getMinExposureCompensation();
             if (value >= min && value <= max) {
-                mParameters.set("exposure-compensation", exposure);
+                mParameters.setExposureCompensation((int)value);
             } else {
                 Log.w(TAG, "invalid exposure range: " + exposure);
             }
@@ -350,7 +350,7 @@ public abstract class BaseCamera extends NoSearchActivity implements View.OnClic
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             if (mPausing || !mPreviewing || mHeadUpDisplay == null || mFocusing
-                    || !"touch".equals(mFocusMode)) {
+                    || !"touch".equals(mFocusMode) || mHeadUpDisplay.isActive()) {
                 return false;
             }
 
