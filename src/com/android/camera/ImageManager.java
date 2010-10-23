@@ -132,8 +132,7 @@ public class ImageManager {
             + "/DCIM/Camera";
     
     public static final String CAMERA_IMAGE_BUCKET_SDEXT_NAME =
-    	Environment.getExternalSdDirectory().toString()
-        + "/DCIM/Camera";    
+         "/mnt/sdcard/sd/DCIM/Camera";    
     
     public static final String CAMERA_IMAGE_BUCKET_ID =
             getBucketId(CAMERA_IMAGE_BUCKET_NAME);
